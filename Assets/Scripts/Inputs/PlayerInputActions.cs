@@ -86,7 +86,6 @@ public class PlayerInputActions : ScriptableObject, InputSystem_Actions.IPlayerA
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -106,17 +105,14 @@ public class PlayerInputActions : ScriptableObject, InputSystem_Actions.IPlayerA
 
     public void OnNext(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnPrevious(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
     }
 
     private void OnEnable()
