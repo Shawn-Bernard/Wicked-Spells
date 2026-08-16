@@ -12,17 +12,46 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        moveDirection = moveDirection.normalized;
 
-        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        
+        float moveDistance = moveSpeed * Time.deltaTime;
+        float playerRadius = .7f;
+        float playerHeight = 2f;
+        bool canMove = !Physics.CapsuleCast(transform.position,transform.position + Vector3.up * playerHeight, playerRadius, moveDirection,moveDistance);
 
-        transform.forward = Vector3.Slerp(transform.forward,moveDirection, Time.deltaTime * rotationSpeed);
-        //Debug.Log(movementVector);
+        if (!canMove)
+        {
+            Vector3 moveDirX = new Vector3(moveDirection.x, 0, 0).normalized;
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+
+            if (canMove)
+            {
+                moveDirection = moveDirX;
+            }
+            else
+            {
+                Vector3 moveDirZ = new Vector3(0, 0, moveDirection.z).normalized;
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+
+                if (canMove)
+                {
+                    moveDirection = moveDirZ;
+                }
+            }
+
+        }
+
+        if (canMove)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+            transform.position += moveDirection * moveDistance;
+            //Debug.Log(movementVector);
+        }
     }
 
     private void Movement(Vector2 inputVector)
     {
-        moveDirection = new Vector3(inputVector.x,0, inputVector.y);
+        moveDirection = new Vector3(inputVector.x,0, inputVector.y).normalized;
     }
 
     private void IsWalking()

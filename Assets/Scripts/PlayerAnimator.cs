@@ -16,11 +16,11 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (boolValue) 
         {
-            Debug.Log("Is walking");
+            //Debug.Log("Is walking");
         }
         else
         {
-            Debug.Log("Isnt walking");
+            //Debug.Log("Isnt walking");
         }
         //animator.SetBool(IS_WALKING, boolValue);
     }
